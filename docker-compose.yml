@@ -1,0 +1,56 @@
+version: '3.4'
+services:
+
+  task_manager_nginx:
+      image: nginx:1.19.0-alpine
+      container_name: task_manager_nginx
+      restart: always
+      volumes:
+        - ./:/usr/src/app
+        - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      ports:
+        - ${DOCKER_NGINX_PORTS}
+      depends_on:
+        - task_manager_php
+
+  task_manager_php:
+      build:
+        context: .
+        dockerfile: docker/php/Dockerfile
+      image: task_manager_php:1.0
+      environment:
+        PHP_IDE_CONFIG: serverName=task_manager_php
+      container_name: task_manager_php
+      restart: always
+      user: 1000:1000
+      volumes:
+        - ./:/usr/src/app
+        - ./docker/php/php.ini:/usr/local/etc/php/conf.d/custom.ini
+        - ./docker/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+      ports:
+        -  ${DOCKER_PHP_PORTS}
+      depends_on:
+        - task_manager_db
+      dns:
+        - 8.8.8.8
+
+  task_manager_db:
+      image: mariadb:10.5.8
+      container_name: task_manager_db
+      restart: always
+      volumes:
+        - task_manager_dbdata:/var/lib/mysql
+      ports:
+        - ${DOCKER_DB_PORTS}
+      environment:
+        MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+        TZ: Europe/Madrid
+      command: mysqld --innodb-large-prefix --innodb-file-format=barracuda --innodb-file-per-table
+
+volumes:
+  task_manager_dbdata:
+
+networks:
+  default:
+    external:
+      name: task_manager-network
