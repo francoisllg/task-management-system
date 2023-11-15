@@ -27,7 +27,7 @@ Or with this command in the native terminal of your OS:
 ```docker exec -it task_manager_php php artisan migrate:fresh --seed```
 
 
-- We have everything ready, now we go from the browser to "http://127.0.7.14" if we are in Linux, to "http://localhost:87" if we are in Windows, or "http://127.0.0.1.1:80" if we are using a Mac with ARM processor.
+- We have everything ready, now we go from the browser to "http://127.0.7.14" if we are in Linux, to "http://localhost:87" if we are in Windows, or "http://127.0.0.1:80" if we are using a Mac with ARM processor.
 
 ## Usage
 
