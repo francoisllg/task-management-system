@@ -12,6 +12,8 @@ services:
         - ${DOCKER_NGINX_PORTS}
       depends_on:
         - task_manager_php
+      networks:
+        - task_manager_network
 
   task_manager_php:
       build:
@@ -21,7 +23,7 @@ services:
       environment:
         PHP_IDE_CONFIG: serverName=task_manager_php
       container_name: task_manager_php
-      restart: always
+      restart: on-failure
       user: 1000:1000
       volumes:
         - ./:/usr/src/app
@@ -33,6 +35,8 @@ services:
         - task_manager_db
       dns:
         - 8.8.8.8
+      networks:
+        - task_manager_network
 
   task_manager_db:
       image: mariadb:10.5.8
@@ -45,12 +49,15 @@ services:
       environment:
         MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
         TZ: Europe/Madrid
-      command: mysqld --innodb-large-prefix --innodb-file-format=barracuda --innodb-file-per-table
+        MYSQL_DATABASE: 'laravel'
+        MYSQL_USER: 'root'
+        MYSQL_PASSWORD:
+      networks:
+        - task_manager_network
 
 volumes:
   task_manager_dbdata:
 
 networks:
-  default:
-    external:
-      name: task_manager-network
+  task_manager_network:
+    driver: bridge

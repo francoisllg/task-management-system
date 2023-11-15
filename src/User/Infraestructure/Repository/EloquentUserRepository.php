@@ -34,6 +34,23 @@ final class EloquentUserRepository implements UserRepositoryInterface
         return null;
     }
 
+    public function findAll(): array
+    {
+        $result = $this->model->all();
+        $users = [];
+        if (!empty($result)) {
+            foreach ($result as $user) {
+                $users[] = new User(
+                    new UserId($user->id),
+                    new UserName($user->name),
+                    new UserEmail($user->email),
+                    new UserPassword($user->password)
+                );
+            }
+        }
+        return $users;
+    }
+
     public function findByEmail(UserEmail $email): ?User
     {
         $result = $this->model->where('email', $email)->first();

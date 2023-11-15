@@ -20,6 +20,22 @@ class UserControllerTest extends TestCase
     }
 
     /** @test */
+    public function user_can_get_all_users(): void
+    {
+        //arrange
+        $loggedUser = User::all()->random();
+
+        //act
+        $this->actingAs($loggedUser);
+        $response = $this->get('/api/v1/users');
+        $result = $response['data'];
+
+        //assert
+        $response->assertStatus(200);
+        $this->assertCount(11, $result);
+    }
+
+    /** @test */
     public function user_can_get_all_tasks_by_user_id(): void
     {
         //arrange

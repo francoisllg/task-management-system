@@ -11,6 +11,7 @@ use Src\User\Domain\ValueObject\UserEmail;
 interface UserRepositoryInterface
 {
     public function findById(UserId $userId): ?User;
+    public function findAll(): array;
     public function findByEmail(UserEmail $email): ?User;
     public function createAccessToken(UserId $userId): string;
 }

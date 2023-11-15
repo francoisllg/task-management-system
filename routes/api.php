@@ -30,6 +30,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::group(['prefix' => 'v1/users'], function () {
         Route::get('/{user_id}/tasks', [UserController::class, 'indexTasksByUserId']);
+        Route::get('/', [UserController::class, 'index']);
     });
 
 });
