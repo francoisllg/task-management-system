@@ -9,9 +9,8 @@ Dockeried Laravel app to create, update and list tasks and assign users to them.
 
 - Install both [Docker](https://docs.docker.com/engine/install/ubuntu/) and [Docker-compose](https://docs.docker.com/compose/install/).
 
-- Once this is done, go to the folder "docker/" and copy the file ".unix.conf", ".windows.conf" or ".mac-arm.conf" (depending on the operating system you use) and paste it with the name ".env" in the same folder.
 
-- Now from the docker folder we launch 
+- Now from the root project folder we launch 
 
 ```"docker-compose up -d"```
 
