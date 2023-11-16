@@ -14,11 +14,15 @@ Dockeried Laravel app to create, update and list tasks and assign users to them.
 
 ```"docker-compose up -d"```
 
-Update composer first and then migrate the dabasae , running this in the docker php shell 
+Update composer first and then migrate the dabasae , running this in the docker project php shell 
 
    ```composer update```
 
    ```php artisan migrate:fresh --seed```
+
+(if you are using WSL2 instead of native Windows or MacOW, you may need to change the file permissions of the project folder from the docker php shell)
+
+```chmod -R 777 .```
 
 - We have everything ready, now we go from the browser to "http://localhost:8082" and we will see the laravel welcome page.
 
