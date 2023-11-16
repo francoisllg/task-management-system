@@ -14,20 +14,16 @@ Dockeried Laravel app to create, update and list tasks and assign users to them.
 - Now from the docker folder we launch 
 ```"docker-compose up -d"```
 
-- Then, in the root of the project copy the example env file (.env.example) and make the required configuration changes in the .env file
-
-    ```cp .env.example .env```
-
-Migrate the dabasae , running this in the docker php shell 
-
+Update composer first and then migrate the dabasae , running this in the docker php shell 
+   ```composer update```
    ```php artisan migrate:fresh --seed```
 
 Or with this command in the native terminal of your OS:
+```docker exec -it task-manager-app composer update```
+```docker exec -it task-manager-app php artisan migrate:fresh --seed```
 
-```docker exec -it task_manager_php php artisan migrate:fresh --seed```
 
-
-- We have everything ready, now we go from the browser to "http://127.0.7.14" if we are in Linux, to "http://localhost:87" if we are in Windows, or "http://127.0.0.1:80" if we are using a Mac with ARM processor.
+- We have everything ready, now we go from the browser to "http://localhost:8082" and we will see the laravel welcome page.
 
 ## Usage
 
@@ -40,17 +36,16 @@ php artisan test
 ```
 Native Terminal:
 ```
-docker exec -it task_manager_php php artisan test
+docker exec -it task_manager_app php artisan test
 ```
-
-
-If you want to test the routes with postman, you have to use real User IDs that you can find in the file storage/app/csv/data.csv.
 
 ## API Routes
 
 ```
 Public routes
+Login         => POST api/v1/login
 
+Protected routes
 Create a task => POST api/v1/tasks
 Update a task => PATCH api/v1/tasks/{task_id}
 Get a task    => GET api/v1/tasks/{task_id}
