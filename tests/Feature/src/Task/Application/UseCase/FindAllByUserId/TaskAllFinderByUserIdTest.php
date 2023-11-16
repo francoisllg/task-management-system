@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature\src\Task\Application\UseCase\Create;
+namespace Tests\Feature\src\Task\Application\UseCase\FindAllByUserId;
 
 use Tests\TestCase;
 use Src\Task\Domain\Enum\TaskStatusEnum;

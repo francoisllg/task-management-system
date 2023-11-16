@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\src\Task\Application\UseCase\Create;
+namespace Tests\Unit\src\Task\Application\UseCase\FindById;
 
 use Mockery;
 use Tests\TestCase;
