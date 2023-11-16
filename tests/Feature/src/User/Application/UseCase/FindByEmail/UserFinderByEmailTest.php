@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature\src\User\Application\UseCase\FindAllByEmail;
+namespace Tests\Feature\src\User\Application\UseCase\FindByEmail;
 
-use App\Models\User\User;
 use Tests\TestCase;
+use App\Models\User\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Src\User\Application\UseCase\FindByEmail\UserFinderByEmail;
 
