@@ -1,7 +1,7 @@
 
 # Challenge: Task Manager Service with DDD  
 
-Dockeried Laravel app to create, update and list tasks and assign users to them.
+Dockeried Laravel app with DDD to create, update and list tasks and assign users to them.
 
 
 ## Installation
